@@ -54,18 +54,3 @@ val_not(VX,Val).
 
 lookup(X,[X|_],[V|_],V).
 lookup(X,[_|Vars],[_|A],V) :- lookup(X,Vars,A,V).
-
-
-/* Generate the truth table and display the answer */
-tt(E) :- variable_find(E,[],V),
-reverse(V,Vars),
-truth_initial(Vars,A),
-write('  '), write(Vars), write('    '), write(E), nl,
-write('-----------------------------------------'), nl,
-next_row(E,Vars,A),
-write('-----------------------------------------'), nl.
-
-/* Write the next row of the truth table */
-next_row(E,Vars,A) :- write('  '), write(A), write('        '), 
-truth_val(E,Vars,A,V), write(V), nl,
-                       (successor(A,N) ->next_row(E,Vars,N) ; true).
