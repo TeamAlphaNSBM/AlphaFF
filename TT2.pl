@@ -39,3 +39,18 @@ val_or(1,1,1).
 val_not(0,1).
 val_not(1,0).
 
+/* Definition for the truth value */
+truth_val(N,_,_,N) :- member(N,[0,1]).
+truth_val(X,Vars,A,Val) :- atom(X),
+lookup(X,Vars,A,Val).
+truth_val(X and Y,Vars,A,Val) :- truth_val(X,Vars,A,VX),
+truth_val(Y,Vars,A,VY),
+val_and(VX,VY,Val).
+truth_val(X or Y,Vars,A,Val) :-  truth_val(X,Vars,A,VX),
+truth_val(Y,Vars,A,VY),
+val_or(VX,VY,Val).
+truth_val(not X,Vars,A,Val) :-   truth_val(X,Vars,A,VX),
+val_not(VX,Val).
+
+lookup(X,[X|_],[V|_],V).
+lookup(X,[_|Vars],[_|A],V) :- lookup(X,Vars,A,V).
