@@ -27,3 +27,15 @@ reverse(N,S).
 next([0|R],[1|R]).
 next([1|R],[0|S]) :- next(R,S).
 
+/* truth table for the three infix operations */
+val_and(0,0,0). 
+val_and(0,1,0).     
+val_and(1,0,0).
+val_and(1,1,1).
+val_or(0,0,0).      
+val_or(0,1,1).
+val_or(1,0,1).      
+val_or(1,1,1).
+val_not(0,1).
+val_not(1,0).
+
